@@ -101,40 +101,40 @@ class Permutation<T> private constructor(private val baseIndex: Int, private var
     }
 }
 
-//二分探索、ソート済みリストに対して与えられた条件を満たす最後のindexを返す
 inline fun <T> List<T>.fastIndexOfLast(predicate: (T) -> Boolean): Int {
-    var left = 0L
-    var right = size - 1L
+    var left = 0
+    var right = size - 1
     while (left < right) {
-        val index = ((left + right) / 2).toInt()
+        val index = ((left + right) / 2)
         if (predicate(this[index])) {
-            left = index + 1L
+            left = index + 1
         } else {
-            right = index.toLong()
+            right = index
         }
     }
-    return if (predicate(this[left.toInt()])) {
-        left.toInt()
+    return if (predicate(this[left])) {
+        left
     } else {
-        left.toInt() - 1
+        left - 1
     }
 }
 
-//二分探索、ソート済みリストに対して与えられた条件を満たす最初のindexを返す
 inline fun <T> List<T>.fastIndexOfFirst(predicate: (T) -> Boolean): Int {
-    var left = 0L
-    var right = size - 1L
+    var left = 0
+    var right = size - 1
+    var allFalse = true
     while (left < right) {
-        val index = ((left + right) / 2).toInt()
+        val index = ((left + right) / 2)
         if (predicate(this[index])) {
-            right = index.toLong()
+            right = index
+            allFalse = false
         } else {
-            left = index + 1L
+            left = index + 1
         }
     }
-    return if (predicate(this[left.toInt()])) {
-        left.toInt()
-    } else {
-        left.toInt() - 1
+    return when {
+        predicate(this[left]) -> left
+        allFalse -> return -1
+        else -> left - 1
     }
 }

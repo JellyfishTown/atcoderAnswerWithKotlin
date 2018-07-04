@@ -5,26 +5,29 @@ fun main(args: Array<String>) {
     val (a, b, c, d) = inputList.subList(0, 4)
     val (e, f) = inputList.subList(4, 6)
 
-    var noudo = 0.0
-    var mizu = 0
-    var sato = 0
-    for (i1 in 0..(f/(100*a))) {
-        for (i2 in 0..(f/(100*b))) {
-            for (i3 in 0..(f/c)) {
-                for (i4 in 0..(f/d)) {
-                    if (i1 == 0 && i2 == 0) break
-                    if (a * i1 * 100 + b * i2 * 100 + c * i3 + d * i4 > f) break
-                    val n = (c * i3 + d * i4).toDouble() / (a * i1 * 100 + b * i2 * 100).toDouble()
-                    if (n > (e.toDouble() / 100)) break
-                    if (n > noudo) {
-                        noudo = n
-                        mizu = a * i1 * 100 + b * i2 * 100 + c * i3 + d * i4
-                        sato = c * i3 + d * i4
+    var concentration = 0.0
+    var all = 0
+    var sugar = 0
+    for (ia in 0..(f / (100 * a))) {
+        for (ib in 0..(f / (100 * b))) {
+            for (ic in 0..(f / c)) {
+                for (id in 0..(f / d)) {
+                    if (ia == 0 && ib == 0) break
+                    val tempWater = a * ia * 100 + b * ib * 100
+                    val tempSugar = c * ic + d * id
+                    val tempAll = tempWater + tempSugar
+                    if (tempAll > f) break
+                    val tempConcentration = 100.0 * tempSugar.toDouble() / tempWater.toDouble()
+                    if (tempConcentration > e.toDouble()) break
+                    if (tempConcentration > concentration) {
+                        concentration = tempConcentration
+                        all = tempAll
+                        sugar = tempSugar
                     }
                 }
             }
         }
     }
-    if(mizu == 0 )mizu = 100 *a
-    println("$mizu $sato")
+    if (all == 0) all = 100 * a
+    println("$all $sugar")
 }

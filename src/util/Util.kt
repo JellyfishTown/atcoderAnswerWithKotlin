@@ -2,6 +2,10 @@ package util
 
 //コピペ用ライブラリ
 import kotlin.system.measureTimeMillis
+import java.util.Arrays
+import java.util.Comparator
+import java.util.PriorityQueue
+
 
 fun input() {
     val s = readLine()!!
@@ -42,10 +46,12 @@ fun getPrimeList(max: Int): MutableList<Int> {
     return list
 }
 
-//階乗を計算する。20!が限界
-fun calcFactorial(i: Int): Long {
-    return if (i == 1) {
+//階乗を計算する。
+fun calcFactorial(i: Long, modNum: Long? = null): Long {
+    return if (i == 1L) {
         1
+    } else if (modNum != null) {
+        (i * calcFactorial(i - 1, modNum)) % modNum
     } else {
         i * calcFactorial(i - 1)
     }
@@ -136,5 +142,43 @@ inline fun <T> List<T>.fastIndexOfFirst(predicate: (T) -> Boolean): Int {
         predicate(this[left]) -> left
         allFalse -> return -1
         else -> left - 1
+    }
+}
+
+class DijkstraMatrix(n: Int) {
+    var a: Array<IntArray>
+    var b: BooleanArray
+    var q: PriorityQueue<IntArray>
+
+    init {
+        a = Array(n + 1) { IntArray(n + 1) }
+        b = BooleanArray(n + 1)
+        q = PriorityQueue(n + 1, Comparator { o1, o2 -> o1[1] - o2[1] })
+    }
+
+    fun set(i: Int, j: Int, cost: Int) {
+        a[i][j] = cost
+    }
+
+    fun getCost(s: Int, e: Int): Int {
+        Arrays.fill(b, false)
+        q.clear()
+        b[s] = true
+        for (i in 1 until a.size)
+            if (a[s][i] > 0)
+                q.add(intArrayOf(i, a[s][i]))
+        var c = 0
+        while (!q.isEmpty()) {
+            val t = q.poll()
+            if (t!![0] == e) {
+                c = t[1]
+                break
+            }
+            b[t[0]] = true
+            for (i in 1 until a.size)
+                if (!b[i] && a[t[0]][i] > 0)
+                    q.add(intArrayOf(i, t[1] + a[t[0]][i]))
+        }
+        return c
     }
 }

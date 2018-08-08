@@ -1,6 +1,6 @@
 package point200
 
-//fun point300.point300.point300.point200.point400.point200.point200.main(args: Array<String>) {
+//fun point300.point300.point300.point200.point400.point200.point200.point200.point400.main(args: Array<String>) {
 //    val (a, b) = readLine()!!.split(" ").map(String::toInt)
 //    println(if (a * b % 2 == 0) "Even" else "Odd")
 //}

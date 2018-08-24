@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
 
 }
 //
-//fun main(args: Array<String>) {
+//fun abc106.abc104.main(args: Array<String>) {
 //    val (c, d) = readLine()!!.split(" ").map(String::toLong)
 //    val bpmlist = mutableListOf<Pair<Long, Long>>()
 //    bpmlist.add(Pair(140,170))

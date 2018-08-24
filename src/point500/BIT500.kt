@@ -1,4 +1,4 @@
-//fun point200.point400.main(args: Array<String>) {
+//fun point200.point400.abc106.abc104.main(args: Array<String>) {
 //    val sList = readLine()!!.toCharArray().toMutableList()
 //    var lNumAccum = mutableListOf(0)
 //    var rNumAccum = mutableListOf(0)

@@ -1,3 +1,5 @@
+package abc104
+
 fun main(args: Array<String>) {
     val s = readLine()!!
     val dp = Array(s.length + 1) { arrayOfNulls<Long>(4) }
@@ -19,7 +21,7 @@ fun main(args: Array<String>) {
     }
     println(dp[0][0])
 }
-// fun main(args: Array<String>) {
+// fun abc106.abc104.main(args: Array<String>) {
 //    val (dt, g) = readLine()!!.split(' ').map(String::toLong)
 //    val d = dt.toInt()
 //    val pArray = Array(d + 1) { arrayOfNulls<Long>(101) }
@@ -57,7 +59,7 @@ fun main(args: Array<String>) {
 //    }
 //}
 
-//fun main(args: Array<String>) {
+//fun abc106.abc104.main(args: Array<String>) {
 //    val s = readLine()!!
 //    println(if (s.startsWith("A") && s.substring(2, s.length - 1).count { it == 'C' } == 1 && s.count { it.isLowerCase() } == s.length - 2) {
 //        "AC"
@@ -67,7 +69,7 @@ fun main(args: Array<String>) {
 //}
 
 
-//fun main(args: Array<String>) {
+//fun abc106.abc104.main(args: Array<String>) {
 //    val r = readLine()!!.toInt()
 //    when {
 //        r < 1200 -> println("ABC")

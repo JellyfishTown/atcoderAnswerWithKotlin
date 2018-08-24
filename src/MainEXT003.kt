@@ -64,7 +64,7 @@ fun rev(i: Int): Int {
     return i.toString().toCharArray().reversed().joinToString(separator = "").toInt()
 }
 
-//fun main(args: Array<String>) {
+//fun abc106.abc104.main(args: Array<String>) {
 //    var count = readLine()!!.toInt()
 //    val sList = readLine()!!.toCharArray()
 //    if (count <= 0) {

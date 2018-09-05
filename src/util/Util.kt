@@ -145,40 +145,29 @@ inline fun <T> List<T>.fastIndexOfFirst(predicate: (T) -> Boolean): Int {
     }
 }
 
-class DijkstraMatrix(n: Int) {
-    var a: Array<IntArray>
-    var b: BooleanArray
-    var q: PriorityQueue<IntArray>
-
-    init {
-        a = Array(n + 1) { IntArray(n + 1) }
-        b = BooleanArray(n + 1)
-        q = PriorityQueue(n + 1, Comparator { o1, o2 -> o1[1] - o2[1] })
+fun gcd(a: Long, b: Long): Long {
+    var a = a
+    var b = b
+    if (a < b) {
+        val tmp = a
+        a = b
+        b = tmp
     }
-
-    fun set(i: Int, j: Int, cost: Int) {
-        a[i][j] = cost
+    var r = -1L
+    while (r != 0L) {
+        r = a % b
+        a = b
+        b = r
     }
-
-    fun getCost(s: Int, e: Int): Int {
-        Arrays.fill(b, false)
-        q.clear()
-        b[s] = true
-        for (i in 1 until a.size)
-            if (a[s][i] > 0)
-                q.add(intArrayOf(i, a[s][i]))
-        var c = 0
-        while (!q.isEmpty()) {
-            val t = q.poll()
-            if (t!![0] == e) {
-                c = t[1]
-                break
-            }
-            b[t[0]] = true
-            for (i in 1 until a.size)
-                if (!b[i] && a[t[0]][i] > 0)
-                    q.add(intArrayOf(i, t[1] + a[t[0]][i]))
-        }
-        return c
-    }
+    return a
 }
+
+fun gcd(param: List<Long>): Long {
+    val len = param.size
+    var g = gcd(param[0], param[1])
+    for (i in 1 until len - 1) {
+        g = gcd(g, param[i + 1])
+    }
+    return g
+}
+

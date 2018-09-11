@@ -2,9 +2,6 @@ package util
 
 //コピペ用ライブラリ
 import kotlin.system.measureTimeMillis
-import java.util.Arrays
-import java.util.Comparator
-import java.util.PriorityQueue
 
 
 fun input() {
@@ -146,28 +143,11 @@ inline fun <T> List<T>.fastIndexOfFirst(predicate: (T) -> Boolean): Int {
 }
 
 fun gcd(a: Long, b: Long): Long {
-    var a = a
-    var b = b
-    if (a < b) {
-        val tmp = a
-        a = b
-        b = tmp
-    }
-    var r = -1L
-    while (r != 0L) {
-        r = a % b
-        a = b
-        b = r
-    }
-    return a
+    return if (b > 0) gcd(b, a % b) else a
 }
 
 fun gcd(param: List<Long>): Long {
-    val len = param.size
     var g = gcd(param[0], param[1])
-    for (i in 1 until len - 1) {
-        g = gcd(g, param[i + 1])
-    }
+    for (i in 2 until param.size) g = gcd(g, param[i])
     return g
 }
-

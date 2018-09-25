@@ -3,7 +3,7 @@ package abc109
 fun main(args: Array<String>) {
     val (n, x) = readLine()!!.split(' ').map(String::toLong)
     val xList = readLine()!!.split(' ').map { Math.abs(it.toLong() - x) }
-    println(abc110.gcd(xList))
+    println(gcd(xList))
 }
 
 fun gcd(a: Long, b: Long): Long {
@@ -26,9 +26,9 @@ fun gcd(a: Long, b: Long): Long {
 fun gcd(param: List<Long>): Long {
     val len = param.size
     if (len == 1) return param[0]
-    var g = abc110.gcd(param[0], param[1])
+    var g = gcd(param[0], param[1])
     for (i in 1 until len - 1) {
-        g = abc110.gcd(g, param[i + 1])
+        g = gcd(g, param[i + 1])
     }
     return g
 }

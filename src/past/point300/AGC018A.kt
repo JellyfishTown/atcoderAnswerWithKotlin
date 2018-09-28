@@ -1,12 +1,8 @@
 fun main(args: Array<String>) {
     val (n, k) = readLine()!!.split(" ").map(String::toLong)
     val aList = readLine()!!.split(" ").map(String::toLong)
-    val gcd = gcd(aList)
-    if (k % gcd == 0L && aList.max()?:0 >= k) {
-        println("POSSIBLE")
-    } else {
-        println("IMPOSSIBLE")
-    }
+    val gcd = if (aList.size == 1) aList[0] else gcd(aList)
+    println(if (k % gcd == 0L && aList.max() ?: 0L >= k) "POSSIBLE" else "IMPOSSIBLE")
 }
 
 fun gcd(a: Long, b: Long): Long {

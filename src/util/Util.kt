@@ -55,10 +55,18 @@ fun calcFactorial(i: Long, modNum: Long? = null): Long {
 }
 
 //nCrを計算する
-fun calcCombination(n: Int, r: Int): Long {
+fun calcCombination(n: Long, r: Long): Long {
     var temp = 1.0
     for (i in 0..(r - 1)) {
         temp = temp * (n - i) / (r - i)
+    }
+    return temp.toLong()
+}
+
+fun calcCombination(n: Long, r: Long, modNum: Long): Long {
+    var temp = 1.0
+    for (i in 0..(r - 1)) {
+        temp = (temp % modNum) * (n - i) / (r - i)
     }
     return temp.toLong()
 }
@@ -150,4 +158,43 @@ fun gcd(param: List<Long>): Long {
     var g = gcd(param[0], param[1])
     for (i in 2 until param.size) g = gcd(g, param[i])
     return g
+}
+
+class Combination(n: Int, private val mod: Int) {
+    private val fact = LongArray(n + 1)
+    private val inv = LongArray(n + 1)
+    private val invFact = LongArray(n + 1)
+
+    init {
+        inv[1] = 1
+        for (i in 2 until inv.size) {
+            inv[i] = inv[mod % i] * (mod - mod / i) % mod
+        }
+
+        fact[0] = 1
+        invFact[0] = 1
+        for (i in 1 until inv.size) {
+            fact[i] = i * fact[i - 1] % mod
+            invFact[i] = inv[i] * invFact[i - 1] % mod
+        }
+    }
+
+    fun calc(n: Int, r: Int): Long {
+        return if (n < r) 0 else fact[n] * invFact[n - r] % mod * invFact[r] % mod
+    }
+}
+
+fun calcFactors(n: Int): Map<Int, Int> {//素因数分解
+    val factors = mutableMapOf<Int, Int>()
+    var tmp = n
+    var i = 2
+    while (i * i <= tmp) {
+        while (tmp % i == 0) {
+            factors[i] = factors.getOrElse(i) { 0 } + 1
+            tmp /= i
+        }
+        i++
+    }
+    if (tmp > 1) factors[tmp] = 1
+    return factors
 }

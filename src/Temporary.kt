@@ -4,7 +4,7 @@ fun main(args: Array<String>) {
 //    val factors = calcFactors(m)
 //    val combCalculator = Combination(n + factors.values.sum(), mod)
 //    var ans = 1
-//    factors.values.forEach { ans = (ans * combCalculator.calc(n + it - 1, it) % mod).toInt() }
+//    factors.values.forEach { ans = (ans * combCalculator.participated.calc(n + it - 1, it) % mod).toInt() }
 //    println(ans)
 
     var dokuritsu = 1.0

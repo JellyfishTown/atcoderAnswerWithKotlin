@@ -1,11 +1,21 @@
 fun main(args: Array<String>) {
-    val (n, m) = readLine()!!.split(' ').map(String::toInt)
-    val mod = 1000000007
-    val factors = calcFactors(m)
-    val combCalculator = Combination(n + factors.values.sum(), mod)
-    var ans = 1
-    factors.values.forEach { ans = (ans * combCalculator.calc(n + it - 1, it) % mod).toInt() }
-    println(ans)
+//    val (n, m) = readLine()!!.split(' ').map(String::toInt)
+//    val mod = 1000000007
+//    val factors = calcFactors(m)
+//    val combCalculator = Combination(n + factors.values.sum(), mod)
+//    var ans = 1
+//    factors.values.forEach { ans = (ans * combCalculator.participated.calc(n + it - 1, it) % mod).toInt() }
+//    println(ans)
+
+    var dokuritsu = 1.0
+    val num = 56800235584
+//    val num = 365
+    val choose = 10000
+//    val choose = 23
+    for (i in num downTo (num - choose + 1)) {
+        dokuritsu *= i.toDouble() / num.toDouble()
+    }
+    println(1.0 - dokuritsu)
 }
 
 fun calcFactors(n: Int): Map<Int, Int> {

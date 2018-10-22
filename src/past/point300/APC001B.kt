@@ -4,14 +4,14 @@ fun main(args: Array<String>) {
     val bList = readLine()!!.split(" ").map(String::toLong)
     val aSum = aList.sum()
     val bSum = bList.sum()
-    var aNum = 0L
-    var bNum = 0L
+    var e = 0L
     for (i in 0 until n) {
-        if (bList[i] < aList[i]) {
-            bNum += aList[i] - bList[i]
-        } else {
-            aNum += bList[i] - aList[i]
-        }
+        val sub = bList[i] - aList[i]
+        if (sub > 0) e += (sub + 1) / 2
     }
-    println(if ((bNum <= (bSum - aSum)) && (aNum <= (bSum - aSum) * 2)) "Yes" else "No")
+    if (bSum - aSum < e) {
+        println("No")
+    } else {
+        println("Yes")
+    }
 }

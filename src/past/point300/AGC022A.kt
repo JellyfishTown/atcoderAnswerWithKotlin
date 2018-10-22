@@ -1,14 +1,18 @@
 import java.util.*
-fun main(args: Array<String>) {
+
+fun main(`$`: Array<String>) {
     val v = readLine()!!
-    for (c in 'a'..'z') {
+    var c = 'a'
+    while (c <= 'z') {
         if (v.indexOf(c) < 0) {
             println(v + c)
+            return
         }
+        ++c
     }
-    val set = TreeSet<Char>()
-    set.add(v.last())
 
+    val set = TreeSet<Char>()
+    set.add(v[v.length - 1])
     for (i in v.length - 2 downTo 0) {
         val c = v[i]
         val h = set.higher(c)
@@ -20,4 +24,3 @@ fun main(args: Array<String>) {
     }
     println(-1)
 }
-

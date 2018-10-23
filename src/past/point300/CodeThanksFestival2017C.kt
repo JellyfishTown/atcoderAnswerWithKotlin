@@ -12,7 +12,6 @@ fun main(args: Array<String>) {
     for(i in 1..k){
         val firstKey = map.firstKey()
         sum += firstKey
-        map.pu
     }
 
 }

@@ -1,4 +1,4 @@
-package agc028
+package participated.agc028
 
 fun main(args: Array<String>) {
     val (n, m) = readLine()!!.split(' ').map(String::toLong)

@@ -1,4 +1,4 @@
-package abc112
+package participated.abc112
 
 fun main(args: Array<String>) {
     val (n, m) = readLine()!!.split(' ').map(String::toLong)

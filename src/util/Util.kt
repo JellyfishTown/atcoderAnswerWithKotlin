@@ -6,13 +6,13 @@ import kotlin.system.measureTimeMillis
 
 fun input() {
     val s = readLine()!!
-    val i = readLine()!!.toInt()
+    val n = readLine()!!.toInt()
     val l = readLine()!!.toLong()
-    val iList = readLine()!!.split(' ').map(String::toInt)
+    val (a,b) = readLine()!!.split(' ').map(String::toLong)
     val lList = readLine()!!.split(' ').map(String::toLong)
 
     val iGrid = mutableListOf<List<Int>>()
-    for (i in 0 until i) {
+    for (i in 1..n) {
         iGrid.add(readLine()!!.split(' ').map(String::toInt))
     }
 }
@@ -45,25 +45,15 @@ fun getPrimeList(max: Int): MutableList<Int> {
 
 //階乗を計算する。
 fun calcFactorial(i: Long, modNum: Long? = null): Long {
-    return if (i == 1L) {
-        1
-    } else if (modNum != null) {
-        (i * calcFactorial(i - 1, modNum)) % modNum
-    } else {
-        i * calcFactorial(i - 1)
+    return when {
+        i == 1L -> 1L
+        modNum != null -> (i * calcFactorial(i - 1, modNum)) % modNum
+        else -> i * calcFactorial(i - 1)
     }
 }
 
 //nCrを計算する
-fun calcCombination(n: Long, r: Long): Long {
-    var temp = 1.0
-    for (i in 0..(r - 1)) {
-        temp = temp * (n - i) / (r - i)
-    }
-    return temp.toLong()
-}
-
-fun calcCombination(n: Long, r: Long, modNum: Long): Long {
+fun calcCombination(n: Long, r: Long, modNum: Long = 1L): Long {
     var temp = 1.0
     for (i in 0..(r - 1)) {
         temp = (temp % modNum) * (n - i) / (r - i)
@@ -150,9 +140,12 @@ inline fun <T> List<T>.fastIndexOfFirst(predicate: (T) -> Boolean): Int {
     }
 }
 
+//最大公約数
 fun gcd(a: Long, b: Long): Long {
     return if (b > 0) gcd(b, a % b) else a
 }
+
+//最大公約数
 
 fun gcd(param: List<Long>): Long {
     var g = gcd(param[0], param[1])

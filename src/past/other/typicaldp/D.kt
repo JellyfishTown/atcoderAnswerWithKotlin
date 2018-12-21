@@ -1,7 +1,5 @@
 package past.other.typicaldp
 
-import java.util.*
-
 fun main(args: Array<String>) {
     val (n, d) = readLine()!!.split(' ').map(String::toLong)
     val dPrimes = Array(6) { 0 }
@@ -52,5 +50,4 @@ fun main(args: Array<String>) {
         }
     }
     println(sum)
-    val s :Stack<String> = Stack()
 }

@@ -41,13 +41,5 @@ fun main(args: Array<String>) {
             }
         }
     }
-    var sum = 0.0
-    for (x in dPrimes[2]..dPrimes[2]) {
-        for (y in dPrimes[3]..dPrimes[3]) {
-            for (z in dPrimes[5]..dPrimes[5]) {
-                sum += dp[n.toInt()][x][y][z]
-            }
-        }
-    }
-    println(sum)
+    println(dp[n.toInt()][dPrimes[2]][dPrimes[3]][dPrimes[5]])
 }

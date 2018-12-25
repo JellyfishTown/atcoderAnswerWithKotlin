@@ -1,6 +1,5 @@
 package past.other.typicaldp
 
-//未完成
 fun main(args: Array<String>) {
     val mod = 1000000007L
     val d = readLine()!!.toInt()
@@ -13,16 +12,16 @@ fun main(args: Array<String>) {
     dp2[0][0] = 1
 
     for (nod in 1..(n.size - 1)) {//number of digits
-        for (rest in 0..(d - 1)) {
-            for (num in 0..9) {
+        for (rest in 0..(d - 1)) {//余り
+            for (num in 0..9) {//nod桁目に追加する数
                 dp[(rest + num) % d][nod] += dp[rest][nod - 1] % mod
             }
         }
     }
     for (nod in 1..n.size) {//number of digits
-        val currentN = n[nod - 1].toString().toInt()
-        for (rest in 0..(d - 1)) {
-            for (num in 0..9) {
+        val currentN = n[nod - 1].toString().toInt()//入力値のnod桁目の値
+        for (rest in 0..(d - 1)) {//余り
+            for (num in 0..9) {//nod桁目に追加する数
                 when {
                     currentN > num ->
                         dp2[(rest + num) % d][nod] += dp[rest][nod - 1] % mod

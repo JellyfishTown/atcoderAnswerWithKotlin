@@ -28,7 +28,7 @@ fun main(args: Array<String>) {
             val bFirst = bSet.indexOfFirst { it >= i }
             answer *=
                     if (aFirst == -1 || bFirst == -1) 0
-                    else (n - aFirst) * (m - bSet.indexOfFirst { it >= i }) - (n * m - i)
+                    else (n - aFirst) * (m - bFirst) - (n * m - i)
         }
         answer %= 1000000007
     }

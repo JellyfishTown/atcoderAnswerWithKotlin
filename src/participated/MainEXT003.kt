@@ -68,12 +68,12 @@ fun rev(i: Int): Int {
 
 //fun participated.abc106.participated.abc104.participated.main(args: Array<String>) {
 //    var count = readLine()!!.toInt()
-//    val sList = readLine()!!.toCharArray()
+//    val map = readLine()!!.toCharArray()
 //    if (count <= 0) {
 //        println("Yes")
 //        return
 //    }
-//    for (s in sList) {
+//    for (s in map) {
 //        if (s == '+') {
 //            count++
 //        } else {

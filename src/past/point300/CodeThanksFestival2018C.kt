@@ -1,13 +1,13 @@
 fun main(args: Array<String>) {
     val n = readLine()!!.toInt()
     val x = readLine()!!.split(" ").map(String::toLong).sorted()
-    var sum = 0L
-
-    for (i in 0 until n - 1) {
-        for (j in i + 1 until n) {
-            sum += x[j] - x[i]
-        }
+    var total = x.map { it - x[0] }.sum()
+    var sum = total
+    for (i in 1 until n) {
+        val diff = x[i] - x[i - 1]
+        total = total + diff * i - diff * (n - i)
+        sum += total
     }
-    println(sum)
+    println(sum / 2)
 }
 

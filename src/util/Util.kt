@@ -1,7 +1,6 @@
 package util
 
 //コピペ用ライブラリ
-import kotlin.system.measureTimeMillis
 
 
 fun input() {
@@ -15,32 +14,6 @@ fun input() {
     for (i in 1..n) {
         iGrid.add(readLine()!!.split(' ').map(String::toInt))
     }
-}
-
-fun countTime(args: Array<String>) {
-    val time = measureTimeMillis {
-        println(getPrimeList(1000000).size)
-    }
-    println("time:$time")
-}
-
-//素数判定用
-fun isPrime(x: Int): Boolean {
-    var i = 2
-    while (i * i <= x) {
-        if (x % i == 0) return false
-        i++
-    }
-    return true
-}
-
-//素数判定用
-fun getPrimeList(max: Int): MutableList<Int> {
-    val list = mutableListOf<Int>()
-    (2..max).filter { i ->
-        (2..Math.sqrt(i.toDouble()).toInt()).all { i % it != 0 }
-    }.forEach { list.add(it) }
-    return list
 }
 
 //階乗を計算する。
@@ -140,18 +113,6 @@ inline fun <T> List<T>.fastIndexOfFirst(predicate: (T) -> Boolean): Int {
     }
 }
 
-//最大公約数
-fun gcd(a: Long, b: Long): Long {
-    return if (b > 0) gcd(b, a % b) else a
-}
-
-//最大公約数
-
-fun gcd(param: List<Long>): Long {
-    var g = gcd(param[0], param[1])
-    for (i in 2 until param.size) g = gcd(g, param[i])
-    return g
-}
 
 class Combination(n: Int, private val mod: Int) {
     private val fact = LongArray(n + 1)

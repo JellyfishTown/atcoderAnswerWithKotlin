@@ -3,11 +3,14 @@ package util
 import java.util.*
 
 fun main() {
-    val node = mutableMapOf<Int,Node>()
+
+
+    val nodes = mutableMapOf<Int, Node>()
 //    ノードへのデータ登録
 
-    calcDijkstraCost(node,0)
+    calcDijkstraCost(nodes, 0)
 }
+
 class Node : Comparable<Node> {
     override fun compareTo(other: Node): Int {
         return if (this.id == other.id) 0 else 1

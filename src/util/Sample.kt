@@ -3,9 +3,8 @@ package util
 import java.util.*
 import kotlin.system.measureTimeMillis
 
-//条件式を適用した結果も{False,False,True,True}の様にソートされているもののみに適用可能であり、
-//{False,True,False,True}の様になる場合は適用不可
-inline fun <T> List<T>.indexOfFirstByBinary(predicate: (T) -> Boolean): Int {
+//条件式を適用した結果も{False,False,True,True}の様にソートされているもののみに適用可能である
+inline fun <T> List<T>.indexOfFirstByBinarySearch(predicate: (T) -> Boolean): Int {
     var left = 0
     var right = size - 1
     while (left < right) {
@@ -35,7 +34,7 @@ fun main(args: Array<String>) {
     }
     val t1 = measureTimeMillis {
         for (i in 1..k) {
-            val tmp = pList.indexOfFirstByBinary { it > i }
+            val tmp = pList.indexOfFirstByBinarySearch { it > i }
         }
     }
     val t2 = measureTimeMillis {

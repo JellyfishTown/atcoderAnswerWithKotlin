@@ -7,7 +7,7 @@ fun input() {
     val s = readLine()!!
     val n = readLine()!!.toInt()
     val l = readLine()!!.toLong()
-    val (a,b) = readLine()!!.split(' ').map(String::toLong)
+    val (a, b) = readLine()!!.split(' ').map(String::toLong)
     val lList = readLine()!!.split(' ').map(String::toLong)
 
     val iGrid = mutableListOf<List<Int>>()
@@ -75,45 +75,6 @@ class Permutation<T> private constructor(private val baseIndex: Int, private var
     }
 }
 
-inline fun <T> List<T>.fastIndexOfLast(predicate: (T) -> Boolean): Int {
-    var left = 0
-    var right = size - 1
-    while (left < right) {
-        val index = ((left + right) / 2)
-        if (predicate(this[index])) {
-            left = index + 1
-        } else {
-            right = index
-        }
-    }
-    return if (predicate(this[left])) {
-        left
-    } else {
-        left - 1
-    }
-}
-
-inline fun <T> List<T>.fastIndexOfFirst(predicate: (T) -> Boolean): Int {
-    var left = 0
-    var right = size - 1
-    var allFalse = true
-    while (left < right) {
-        val index = ((left + right) / 2)
-        if (predicate(this[index])) {
-            right = index
-            allFalse = false
-        } else {
-            left = index + 1
-        }
-    }
-    return when {
-        predicate(this[left]) -> left
-        allFalse -> return -1
-        else -> left - 1
-    }
-}
-
-
 class Combination(n: Int, private val mod: Int) {
     private val fact = LongArray(n + 1)
     private val inv = LongArray(n + 1)
@@ -151,4 +112,15 @@ fun calcFactors(n: Int): Map<Int, Int> {//素因数分解
     }
     if (tmp > 1) factors[tmp] = 1
     return factors
+}
+
+//繰返二乗法
+//n^p mod m を計算する
+fun repeatSquaring(n: Long, p: Long, m: Long): Long {//素因数分解
+    if (p == 0L) return 1L
+    if (p % 2 == 0L) {
+        val t = repeatSquaring(n, p / 2, m)
+        return t * t % m
+    }
+    return n * repeatSquaring(n, p - 1, m)
 }

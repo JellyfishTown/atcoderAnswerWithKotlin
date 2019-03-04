@@ -1,58 +1,6 @@
 fun main(args: Array<String>) {
-//    val (n, m) = readLine()!!.split(' ').map(String::toInt)
-//    val mod = 1000000007
-//    val factors = calcFactors(m)
-//    val combCalculator = Combination(n + factors.values.sum(), mod)
-//    var ans = 1
-//    factors.values.forEach { ans = (ans * combCalculator.participated.calc(n + it - 1, it) % mod).toInt() }
-//    println(ans)
-
-    var dokuritsu = 1.0
-    val num = 56800235584
-//    val num = 365
-    val choose = 10000
-//    val choose = 23
-    for (i in num downTo (num - choose + 1)) {
-        dokuritsu *= i.toDouble() / num.toDouble()
-    }
-    println(1.0 - dokuritsu)
-}
-
-fun calcFactors(n: Int): Map<Int, Int> {
-    val factors = mutableMapOf<Int, Int>()
-    var tmp = n
-    var i = 2
-    while (i * i <= tmp) {
-        while (tmp % i == 0) {
-            factors[i] = factors.getOrElse(i) { 0 } + 1
-            tmp /= i
-        }
-        i++
-    }
-    if (tmp > 1) factors[tmp] = 1
-    return factors
-}
-
-class Combination(n: Int, private val mod: Int) {
-    private val fact = LongArray(n + 1)
-    private val inv = LongArray(n + 1)
-    private val invFact = LongArray(n + 1)
-
-    init {
-        inv[1] = 1
-        for (i in 2 until inv.size) {
-            inv[i] = inv[mod % i] * (mod - mod / i) % mod
-        }
-
-        fact[0] = 1
-        invFact[0] = 1
-        for (i in 1 until inv.size) {
-            fact[i] = i * fact[i - 1] % mod
-            invFact[i] = inv[i] * invFact[i - 1] % mod
-        }
-    }
-
-    fun calc(n: Int, r: Int): Long {
-        return if (n < r) 0 else fact[n] * invFact[n - r] % mod * invFact[r] % mod
-    }
+    val s = readLine()!!
+    val m = mutableMapOf<Char, Int>()
+    for (c in readLine()!!) m[c] = m.getOrDefault(c, 0) + 1
+    println(if (m.all { (k, v) -> v % 2 == 0 }) "Yes" else "No")
 }

@@ -5,11 +5,13 @@ package util
 class UnionFind(private var num: Int) {
     private val parent: IntArray = IntArray(num)
     private val rank: IntArray = IntArray(num)
+    private val size: IntArray = IntArray(num)
 
     init {
         for (i in 0 until num) {
             parent[i] = i
             rank[i] = 1
+            size[i] = 1
         }
     }
 

@@ -75,6 +75,7 @@ class Permutation<T> private constructor(private val baseIndex: Int, private var
     }
 }
 
+//mod付きのnCrを高速計算する
 class Combination(n: Int, private val mod: Int) {
     private val fact = LongArray(n + 1)
     private val inv = LongArray(n + 1)
@@ -116,11 +117,16 @@ fun calcFactors(n: Int): Map<Int, Int> {//素因数分解
 
 //繰返二乗法
 //n^p mod m を計算する
-fun repeatSquaring(n: Long, p: Long, m: Long): Long {//素因数分解
+fun repeatSquaring(n: Long, p: Long, mod: Long): Long {
     if (p == 0L) return 1L
     if (p % 2 == 0L) {
-        val t = repeatSquaring(n, p / 2, m)
-        return t * t % m
+        val t = repeatSquaring(n, p / 2, mod)
+        return t * t % mod
     }
-    return n * repeatSquaring(n, p - 1, m)
+    return n * repeatSquaring(n, p - 1, mod)
+}
+
+//割り算+mod
+fun divWithMod(a: Long, b: Long, mod: Long): Long {
+    return ((a % mod) * b.toBigInteger().modInverse(mod.toBigInteger()).toLong()) % mod
 }

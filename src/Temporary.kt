@@ -1,6 +1,12 @@
+import java.math.BigInteger
+
 fun main(args: Array<String>) {
-    val s = readLine()!!
-    val m = mutableMapOf<Char, Int>()
-    for (c in readLine()!!) m[c] = m.getOrDefault(c, 0) + 1
-    println(if (m.all { (k, v) -> v % 2 == 0 }) "Yes" else "No")
+    val mod = 1000000007L
+    var a = 12345678900000L
+    var b = 100000L
+    println(divWithMod(a,b,mod))
+}
+
+fun divWithMod(a: Long, b: Long, mod: Long): Long {
+    return ((a % mod) * b.toBigInteger().modInverse(mod.toBigInteger()).toLong()) % mod
 }

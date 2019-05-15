@@ -1,5 +1,7 @@
 package util
 
+import java.util.*
+
 //コピペ用ライブラリ
 
 
@@ -100,6 +102,32 @@ class Combination(n: Int, private val mod: Int) {
     }
 }
 
+//return nCk mod M (M must be prime number) O(min(k,n-k)*logM)
+fun nCk(n: Int, k: Int, M: Int): Int {
+    var ret: Long = 1
+    val min = Math.min(k, n - k)
+    for (i in 1..min) {
+        ret = ret * pow(i.toLong(), (M - 2).toLong(), M) % M
+    }
+    for (i in n - min + 1..n) {
+        ret = ret * i % M
+    }
+    return ret.toInt()
+}
+
+//return a^b mod M O(logB)
+fun pow(a: Long, b: Long, M: Int): Long {
+    var b = b
+    var ret: Long = 1
+    var tmp = a
+    while (b > 0) {
+        if (b and 1 == 1L) ret = ret * tmp % M
+        tmp = tmp * tmp % M
+        b = b shr 1
+    }
+    return ret
+}
+
 fun calcFactors(n: Int): Map<Int, Int> {//素因数分解
     val factors = mutableMapOf<Int, Int>()
     var tmp = n
@@ -130,3 +158,4 @@ fun repeatSquaring(n: Long, p: Long, mod: Long): Long {
 fun divWithMod(a: Long, b: Long, mod: Long): Long {
     return ((a % mod) * b.toBigInteger().modInverse(mod.toBigInteger()).toLong()) % mod
 }
+

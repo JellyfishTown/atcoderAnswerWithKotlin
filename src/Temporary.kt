@@ -5,6 +5,7 @@ fun main(args: Array<String>) {
     var a = 12345678900000L
     var b = 100000L
     println(divWithMod(a,b,mod))
+
 }
 
 fun divWithMod(a: Long, b: Long, mod: Long): Long {

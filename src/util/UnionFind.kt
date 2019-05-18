@@ -42,3 +42,21 @@ class UnionFind(private var num: Int) {
         return u
     }
 }
+
+
+//別パターン
+fun find(tree: IntArray, idx: Int): Int {
+    return if (tree[idx] == idx)
+        idx
+    else{
+        val find = find(tree, tree[idx])
+        tree[idx] = find
+        find
+    }
+}
+//union idx2 tree to idx1 tree O(a(N))
+fun union(tree: IntArray, idx1: Int, idx2: Int) {
+    val root1 = find(tree, idx1)
+    val root2 = find(tree, idx2)
+    tree[root2] = root1
+}

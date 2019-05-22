@@ -1,8 +1,5 @@
 package util
 
-import java.util.*
-import kotlin.system.measureTimeMillis
-
 //条件式を適用した結果も{False,False,True,True}の様にソートされているもののみに適用可能である
 inline fun <T> List<T>.indexOfFirstByBinarySearch(predicate: (T) -> Boolean): Int {
     var left = 0
@@ -25,23 +22,6 @@ inline fun <T> List<T>.indexOfFirstByBinarySearch(predicate: (T) -> Boolean): In
 }
 
 fun main(args: Array<String>) {
-    val k = 2000
-    val pList = mutableListOf<Int>()
-    for (i in 1..k) {
-        for (j in 1..i) {
-            pList.add(i)
-        }
-    }
-    val t1 = measureTimeMillis {
-        for (i in 1..k) {
-            val tmp = pList.indexOfFirstByBinarySearch { it > i }
-        }
-    }
-    val t2 = measureTimeMillis {
-        for (i in 1..k) {
-            val tmp = pList.indexOfFirst { it > i }
-        }
-    }
+    val data = arrayOf(10, 20, 20, 30, 30, 30, 40, 40, 40, 40, 50)
 
-    println(t1.toString() + ":" + t2.toString())
 }

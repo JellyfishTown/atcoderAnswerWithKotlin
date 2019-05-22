@@ -2,8 +2,9 @@ package util
 
 fun main(args: Array<String>) {
     val data = arrayOf(10, 20, 20, 30, 30, 30, 40, 40, 40, 40, 50)
-    println(data.lowerBound(30))
-    println(data.upperBound(30))
+    println(data.lowerBound(25))
+    println(data.upperBound(25))
+    println(data.size)
 }
 
 

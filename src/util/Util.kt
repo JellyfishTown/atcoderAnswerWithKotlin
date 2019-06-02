@@ -1,6 +1,6 @@
 package util
 
-import java.util.*
+import java.math.BigInteger
 
 //コピペ用ライブラリ
 
@@ -116,14 +116,14 @@ fun nCk(n: Int, k: Int, M: Int): Int {
 }
 
 //return a^b mod M O(logB)
-fun pow(a: Long, b: Long, M: Int): Long {
-    var b = b
+fun pow(a: Long, b: Long, mod: Int): Long {
+    var bt = b
     var ret: Long = 1
     var tmp = a
-    while (b > 0) {
-        if (b and 1 == 1L) ret = ret * tmp % M
-        tmp = tmp * tmp % M
-        b = b shr 1
+    while (bt > 0) {
+        if (bt and 1 == 1L) ret = ret * tmp % mod
+        tmp = tmp * tmp % mod
+        bt = bt shr 1
     }
     return ret
 }
@@ -156,6 +156,6 @@ fun repeatSquaring(n: Long, p: Long, mod: Long): Long {
 
 //割り算+mod
 fun divWithMod(a: Long, b: Long, mod: Long): Long {
-    return ((a % mod) * b.toBigInteger().modInverse(mod.toBigInteger()).toLong()) % mod
+    return ((a % mod) * java.math.BigInteger.valueOf(b).modInverse(java.math.BigInteger.valueOf(mod)).toLong()) % mod
 }
 

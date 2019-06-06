@@ -4,9 +4,14 @@ import java.math.BigInteger
 
 fun main(args: Array<String>) {
     val mod = 1000003L
+    val mods = Array(mod.toInt() + 1) { -1L }
     fun divWithMod(a: Long, b: Long): Long {
-        return ((a % mod) * BigInteger.valueOf(b).modInverse(BigInteger.valueOf(mod)).toLong()) % mod
+        if (mods[b.toInt()] == -1L) {
+            mods[b.toInt()] = ((a % mod) * BigInteger.valueOf(b).modInverse(BigInteger.valueOf(mod)).toLong()) % mod
+        }
+        return mods[b.toInt()]
     }
+
     fun pow(a: Long, b: Long): Long {
         var bt = b
         var ret = 1L
@@ -19,7 +24,7 @@ fun main(args: Array<String>) {
         return ret
     }
 
-    val fact = mutableListOf(0L,1L)
+    val fact = mutableListOf(0L, 1L)
     (2..mod).forEach { fact.add(it * fact[it.toInt() - 1] % mod) }
 
     val q = readLine()!!.toInt()
@@ -29,8 +34,8 @@ fun main(args: Array<String>) {
             println(pow(d, n))
         } else {
             val powd = pow(d, n)
-            val fact1 = fact[(divWithMod(x, d) + (n - 1)).toInt()]
-            val fact2 = fact[(divWithMod(x, d) - 1).toInt()]
+            val fact1 = fact[(divWithMod(x, d) + (n - 1)).toInt() % mod.toInt()]
+            val fact2 = fact[(divWithMod(x, d) - 1).toInt() % mod.toInt()]
             val ans = divWithMod(powd * fact1, fact2)
             println(ans)
         }

@@ -161,5 +161,5 @@ fun divWithMod(a: Long, b: Long, mod: Long): Long {
 
 //引数の数値を2進数表記に変換して文字配列にする
 fun toBinaryNumberCharArray(num:Long,keta:Int):CharArray{
-    return String.format("%0${keta}d", java.lang.Long.toBinaryString(num).toLong()).toCharArray()
+    return String.format("%0${keta}d", java.lang.Long.toBinaryString(num).toLong()).toCharArray().reversedArray()
 }

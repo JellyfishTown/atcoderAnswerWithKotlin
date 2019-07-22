@@ -1,3 +1,5 @@
+package participated.abc133
+
 fun main(args: Array<String>) {
     val n = readLine()!!.toInt()
     val s = readLine()!!

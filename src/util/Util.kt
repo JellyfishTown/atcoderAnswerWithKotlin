@@ -115,6 +115,15 @@ fun nCk(n: Int, k: Int, M: Int): Int {
     return ret.toInt()
 }
 
+//val ncr = Array(2001) { LongArray(2001){0} }
+//ncr[0][0] = 1
+//for (i in 1..2000) {
+//    ncr[i][0] = 1
+//    for (j in 1..i) {
+//        ncr[i][j] = (ncr[i - 1][j - 1] + ncr[i - 1][j]) % mod
+//    }
+//}
+
 //return a^b mod M O(logB)
 fun pow(a: Long, b: Long, mod: Int): Long {
     var bt = b

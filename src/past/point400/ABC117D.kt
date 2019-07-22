@@ -1,36 +1,37 @@
 package past.point400
 
 fun main(args: Array<String>) {
-    fun toBinaryNumberCharArray(num: Long, keta: Int): CharArray {
-        return String.format("%${keta}s", java.lang.Long.toBinaryString(num)).replace(" ", "0").toCharArray()
-                .reversedArray()
-    }
-
-    val keta = 41
-    val twoPow = (0..keta).map { it to Math.pow(2.0, it.toDouble()).toLong() }.toMap()
+    fun max(vararg v: Long): Long = v.max()!!
+    val digits = 41
 
     val (n, k) = readLine()!!.split(' ').map(String::toLong)
-    val aList = readLine()!!.split(' ').map { toBinaryNumberCharArray(it.toLong(), keta) }
-    val standCount = IntArray(keta) { 0 }
-    aList.forEach { a -> (0 until keta).forEach { if (a[it] == '1') standCount[it]++ } }
-    val kBin = toBinaryNumberCharArray(k, keta)
+    val aList = readLine()!!.split(' ').map(String::toLong)
 
-    val dp = Array(keta + 1) { Array(2) { 0L } }//dp[keta][上位桁が全部一致フラグ]
-    for (i in (keta - 1) downTo 0) {
-        val stand = standCount[i]
-        val notStand = n.toInt() - stand
-        if (kBin[i] == '1') {
-            dp[i][0] = Math.max(
-                    dp[i + 1][1] + notStand * twoPow[i]!!, Math.max(
-                    dp[i + 1][0] + notStand * twoPow[i]!!,
-                    dp[i + 1][0] + stand * twoPow[i]!!)
-            )
-            dp[i][1] = dp[i + 1][1] + notStand * twoPow[i]!!
-        } else {
-            dp[i][0] = Math.max(dp[i + 1][0] + notStand * twoPow[i]!!,
-                    dp[i + 1][0] + stand * twoPow[i]!!)
-            dp[i][1] = dp[i + 1][1] + stand * twoPow[i]!!
-        }
+    val dp = Array(digits + 1) { Array(2) { -1L } }//dp[digits][未満フラグ] = 最大値
+    dp[digits][0] = 0L
+
+    for (d in (digits - 1) downTo 0) {
+        val mask = 1L shl d
+        val count1 = aList.count { a -> (a and mask) != 0L }
+        val x0score = count1 * mask//d桁目を0にした場合の、その桁から得られるスコア
+        val x1score = (n - count1) * mask
+
+        //フリー⇒フリー
+        if (dp[d + 1][1] >= 0)
+            dp[d][1] = max(dp[d][1], dp[d + 1][1] + x0score, dp[d + 1][1] + x1score)
+
+        //フリーじゃない⇒フリー
+        if (dp[d + 1][0] >= 0)
+            if (k and mask != 0L)
+                dp[d][1] = max(dp[d][1], dp[d + 1][0] + x0score)
+
+        //フリーじゃない⇒フリーじゃない
+        if (dp[d + 1][0] >= 0)
+            if (k and mask != 0L)
+                dp[d][0] = max(dp[d][0], dp[d + 1][0] + x1score)
+            else
+                dp[d][0] = max(dp[d][0], dp[d + 1][0] + x0score)
+
     }
-    println(Math.max(dp[0][0], dp[0][1]))
+    println(max(dp[0][0], dp[0][1]))
 }

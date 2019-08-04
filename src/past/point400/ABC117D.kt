@@ -1,30 +1,37 @@
 package past.point400
 
 fun main(args: Array<String>) {
-    fun toBinaryNumberCharArray(num: Long, keta: Int): CharArray {
-        return String.format("%0${keta}d", java.lang.Long.toBinaryString(num).toLong()).toCharArray().reversedArray()
-    }
+    fun max(vararg v: Long): Long = v.max()!!
+    val digits = 41
 
-    val keta = 40
     val (n, k) = readLine()!!.split(' ').map(String::toLong)
-    val aList = readLine()!!.split(' ').map { toBinaryNumberCharArray(it.toLong(), keta) }
-    val standCount = IntArray(keta) { 0 }
-    aList.forEach { a -> (0 until keta).forEach { if (a[it] == '1') standCount[it]++ } }
-    val k2 = toBinaryNumberCharArray(k, keta)
+    val aList = readLine()!!.split(' ').map(String::toLong)
 
-    val dp = Array(keta) { Array(2) { "" } }//dp[keta][上位桁が全部一致フラグ]
-    var hasValue = false
-    for (i in (keta - 1) downTo 0) {
-        if (k2[keta] == '1') hasValue = true
-        if (!hasValue) continue
+    val dp = Array(digits + 1) { Array(2) { -1L } }//dp[digits][未満フラグ] = 最大値
+    dp[digits][0] = 0L
 
+    for (d in (digits - 1) downTo 0) {
+        val mask = 1L shl d
+        val count1 = aList.count { a -> (a and mask) != 0L }
+        val x0score = count1 * mask//d桁目を0にした場合の、その桁から得られるスコア
+        val x1score = (n - count1) * mask
+
+        //フリー⇒フリー
+        if (dp[d + 1][1] >= 0)
+            dp[d][1] = max(dp[d][1], dp[d + 1][1] + x0score, dp[d + 1][1] + x1score)
+
+        //フリーじゃない⇒フリー
+        if (dp[d + 1][0] >= 0)
+            if (k and mask != 0L)
+                dp[d][1] = max(dp[d][1], dp[d + 1][0] + x0score)
+
+        //フリーじゃない⇒フリーじゃない
+        if (dp[d + 1][0] >= 0)
+            if (k and mask != 0L)
+                dp[d][0] = max(dp[d][0], dp[d + 1][0] + x1score)
+            else
+                dp[d][0] = max(dp[d][0], dp[d + 1][0] + x0score)
 
     }
-    val a = 1L
+    println(max(dp[0][0], dp[0][1]))
 }
-//            hasValue = true
-//            if(n.toDouble() / 2.0 >= standCount[keta].toDouble()){
-//                dp[keta][1]= "1"
-//            }else{
-//
-//            }

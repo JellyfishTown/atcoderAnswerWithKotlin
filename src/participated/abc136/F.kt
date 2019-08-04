@@ -1,4 +1,4 @@
-package participated.agc035
+package participated.abc136
 
 fun main(args: Array<String>) {
     val n = readLine()!!.toInt()

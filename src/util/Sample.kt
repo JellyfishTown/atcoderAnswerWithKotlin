@@ -22,6 +22,12 @@ inline fun <T> List<T>.indexOfFirstByBinarySearch(predicate: (T) -> Boolean): In
 }
 
 fun main(args: Array<String>) {
-    val data = arrayOf(10, 20, 20, 30, 30, 30, 40, 40, 40, 40, 50)
-
+    val n = readLine()!!.toInt()
+    val aList = readLine()!!.split(' ').map(String::toLong).reversed()
+    var count = 0
+    if(aList[0]>0)count++
+    (0 until aList.size - 1).forEach {
+        if(aList[it]<aList[it+1])count++
+    }
+    println(count)
 }

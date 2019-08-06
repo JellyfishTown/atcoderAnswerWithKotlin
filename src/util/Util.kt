@@ -169,6 +169,23 @@ fun divWithMod(a: Long, b: Long, mod: Long): Long {
 }
 
 //引数の数値を2進数表記に変換して文字配列にする
-fun toBinaryNumberCharArray(num:Long,keta:Int):CharArray{
-    return String.format("%${keta}s", java.lang.Long.toBinaryString(num)).replace(" ","0").toCharArray().reversedArray()
+fun toBinaryNumberCharArray(num: Long, keta: Int): CharArray {
+    return String.format("%${keta}s", java.lang.Long.toBinaryString(num)).replace(" ", "0").toCharArray().reversedArray()
 }
+
+//全ての約数のリストを作成する
+fun divisor(n: Long): List<Long> {
+    val list = mutableListOf<Long>()
+    var i = 1L
+    while (i * i <= n) {
+        if (n % i == 0L) {
+            list.add(i)
+            if (i != n / i) {
+                list.add(n / i)
+            }
+        }
+        i++
+    }
+    return list.sortedDescending()
+}
+

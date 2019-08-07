@@ -28,13 +28,33 @@ fun calcFactorial(i: Long, modNum: Long? = null): Long {
 }
 
 //nCrを計算する
-fun calcCombination(n: Long, r: Long, modNum: Long = 1L): Long {
-    var temp = 1.0
-    for (i in 0..(r - 1)) {
-        temp = (temp % modNum) * (n - i) / (r - i)
+    fun calcCombination(n: Long, r: Long, modNum: Long = 1L): Long {
+        val tr = if (n - r < r) n - r else r
+        if (tr == 0L) return 1
+        if (tr == 1L) return n
+        val numerator = (0 until r).map { n - tr + it + 1 }.toMutableList()
+        val denominator = (0 until r).map { it + 1 }.toMutableList()
+
+        for (p in 2..tr.toInt()) {
+            val pivot = denominator[p - 1]
+            if (pivot > 1) {
+                val offset = (n - tr) % p
+                for (k in p - 1 until r step p.toLong()) {
+                    numerator[(k - offset).toInt()] /= pivot
+                    denominator[k.toInt()] /= pivot
+                }
+            }
+        }
+        var result = 1L
+        for(k in 0 until r){
+            if(numerator[k.toInt()]>1){
+                result *= numerator[k.toInt()]
+                result %= modNum
+
+            }
+        }
+        return result
     }
-    return temp.toLong()
-}
 
 //与えられたArrayの全ての組み合わせを返す
 class Permutation<T> private constructor(private val baseIndex: Int, private var index: Int, val target: Array<T>?) {

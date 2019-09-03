@@ -1,3 +1,4 @@
+package participated.ext011
 fun main(args: Array<String>) {
     val n = readLine()!!.toInt()
     val s = readLine()!!
@@ -6,9 +7,6 @@ fun main(args: Array<String>) {
     (1..n).forEach { aList.add(readLine()!!.toLong()) }
     val (a, b, c) = readLine()!!.split(' ').map(String::toLong)
 
-    if (true) {
-        println()
-    } else {
-        println()
-    }
+
+    println()
 }

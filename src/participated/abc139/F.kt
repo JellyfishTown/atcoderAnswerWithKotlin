@@ -1,20 +1,25 @@
 package participated.abc139
 
 fun main(args: Array<String>) {
-    fun calcDist(x: Long, y: Long) = Math.sqrt((x * x + y * y).toDouble())
+    fun calcDist(x: Double, y: Double) = Math.sqrt((x * x + y * y))
     val n = readLine()!!.toInt()
-    val xyList = mutableListOf<Pair<Long, Long>>()
+    val xyrList = mutableListOf<Triple<Double, Double, Double>>()
     (1..n).forEach {
-        val (x, y) = readLine()!!.split(' ').map(String::toLong)
-        xyList.add(Pair(x, y))
+        val (x, y) = readLine()!!.split(' ').map(String::toDouble)
+        xyrList.add(Triple(x, y, Math.atan2(y, x)))
     }
+    xyrList.sortBy { it.third }
+    xyrList.addAll(xyrList)
     var ans = 0.0
-
-    for (i in 0 until n) {
-        val (x, y) = xyList[i]
-        val filtered =
-                xyList.filterIndexed { index, pair -> index == i || (x * pair.first + y * pair.second) >= 0 }
-        ans = Math.max(ans, calcDist(filtered.map { it.first }.sum(), filtered.map { it.second }.sum()))
+    for (start in 0 until n) {
+        var end = start
+        var curDist = calcDist(xyrList[start].first, xyrList[start].second)
+        while (++end - start < n) {
+            val subList = xyrList.subList(start, end + 1)
+            val nextDist = calcDist(subList.map { it.first }.sum(), subList.map { it.second }.sum())
+            if (curDist > nextDist) break else curDist = nextDist
+        }
+        ans = Math.max(ans, curDist)
     }
     println(ans)
 }

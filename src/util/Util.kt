@@ -209,3 +209,6 @@ fun divisor(n: Long): List<Long> {
     return list.sortedDescending()
 }
 
+
+//二分探索キュー
+val queue = java.util.PriorityQueue<Long>(100, Comparator { o1: Long?, o2: Long? -> if (o1!! > o2!!) -1 else 1 })

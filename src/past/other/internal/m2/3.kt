@@ -2,25 +2,32 @@ package past.other.internal.m2
 
 fun main(args: Array<String>) {
     val n = readLine()!!.toInt()
-    val inputList = mutableListOf<Map<Int, Double>>()
-    val xSet = mutableSetOf<Int>()
+    val xRatioList = mutableListOf<Map<Int, Double>>()//i個目の箱でxが出る確率
+    val xSet = mutableSetOf<Int>()//箱の中に存在する全てのxの一覧
     (1..n).forEach {
         val input = readLine()!!.split(' ').map(String::toInt)
         val m = input[0]
-        val last = input.takeLast(m)
-        val map = mutableMapOf<Int, Double>()
-        last.toSet().forEach { s ->
-            map[s] = last.count { l -> l == s }.toDouble() / m.toDouble()
+        val xList = input.takeLast(m)
+        xSet.addAll(xList)
+
+        val xRatio = mutableMapOf<Int, Double>()
+        xList.toSet().forEach { x ->
+            xRatio[x] = xList.count { l -> l == x }.toDouble() / m.toDouble()//この箱でxが出る確率
         }
-        inputList.add(map)
-        xSet.addAll(last)
+        xRatioList.add(xRatio)
     }
-    val ans = mutableMapOf<Int, Double>()
-    xSet.forEach { ans[it] = 0.0 }
-    for (input in inputList) {
+
+    val ans = mutableListOf<MutableMap<Int, Double>>()//i個目の箱を開けた時点でxが1個以上存在する確率
+    for (i in 1..n) {
+        val ansMap = mutableMapOf<Int, Double>()
+        xSet.forEach { ansMap[it] = 0.0 }
+
+        val xRatio = xRatioList[i - 1]
         for (x in xSet) {
-            ans[x] = ans[x]!! + (1 - ans[x]!!) * (input[x]?:0.0)
+            ansMap[x] = (ans.lastOrNull()?.get(x) ?: 0.0)
+            +(1 - (ans.lastOrNull()?.get(x) ?: 0.0)) * (xRatio[x] ?: 0.0)
         }
+        ans.add(ansMap)
     }
-    println(ans.values.sum())
+    println(ans.last().values.sum())
 }

@@ -1,4 +1,4 @@
-package past.other.internal
+package past.other.internal.m1
 
 fun main(args: Array<String>) {
     val n = readLine()!!.toInt()

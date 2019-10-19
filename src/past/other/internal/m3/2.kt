@@ -3,13 +3,20 @@ package past.other.internal.m3
 import java.util.*
 
 fun main(args: Array<String>) {
+
+    //input受取
     val (r, c) = readLine()!!.split(' ').map(String::toInt)
     val map = Array(r + 2) { Array(c + 2) { 'x' } }
+
+    //最寄りの*までの距離を格納する配列。Intの最大値で初期化
     val distMap = Array(r + 2) { Array(c + 2) { Int.MAX_VALUE } }
     val dx = arrayOf(1, 0, -1, 0)
     val dy = arrayOf(0, 1, 0, -1)
 
+    //bfsやるためのQueue
     val queue = ArrayDeque<Pair<Int, Int>>()
+
+    //input受け取り
     (1..r).forEach { tr ->
         val line = readLine()!!.toCharArray()
         (1..c).forEach { tc ->

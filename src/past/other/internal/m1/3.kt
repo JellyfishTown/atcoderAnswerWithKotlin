@@ -10,3 +10,7 @@ fun main(args: Array<String>) {
     }
     println(ans)
 }
+
+//fun main(args: Array<String>) {
+//    println((1..(readLine()!!.toInt())).map { if (it.toString().reversed().toInt() > it) 1 else 0 }.sum())
+//}

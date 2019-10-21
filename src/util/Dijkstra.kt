@@ -13,7 +13,7 @@ fun main() {
 
 class Node : Comparable<Node> {
     override fun compareTo(other: Node): Int {
-        return if (this.id == other.id) 0 else 1
+        return if (this.cost > other.cost) -1 else 1
     }
 
     private val id = Math.random()

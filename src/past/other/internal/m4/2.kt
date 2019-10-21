@@ -5,46 +5,29 @@ import java.util.*
 fun main(args: Array<String>) {
     val n = readLine()!!.toInt()
     val aList = readLine()!!.split(' ').map(String::toLong).sorted()
-    val inQueue = ArrayDeque<Long>()
-    aList.forEach { inQueue.add(it) }
+    val inQueue = ArrayDeque(aList)
 
-    val ansQueue = ArrayDeque<Long>()
-    ansQueue.add(inQueue.removeFirst())
-    var getFromLast = true
-    while (inQueue.isNotEmpty()) {
-        if (getFromLast) {
+    val ansQueue = ArrayDeque<Long>().apply { this.add(inQueue.removeFirst()) }
+    var getFromBigger = true
+    while (inQueue.size > 1) {
+        if (getFromBigger) {
             ansQueue.addFirst(inQueue.removeLast())
-            if (inQueue.isEmpty()) break
+            if (inQueue.size == 1) break
             ansQueue.addLast(inQueue.removeLast())
         } else {
             ansQueue.addFirst(inQueue.removeFirst())
-            if (inQueue.isEmpty()) break
+            if (inQueue.size == 1) break
             ansQueue.addLast(inQueue.removeFirst())
         }
-        getFromLast = !getFromLast
+        getFromBigger = getFromBigger.not()
     }
 
-    var ansList = ansQueue.toList()
-    var ans = (1 until n).map { Math.abs(ansList[it] - ansList[it - 1]) }.sum()
+    ansQueue.addFirst(inQueue.removeFirst())
+    val ansList1 = ansQueue.toList()
+    ansQueue.addLast(ansQueue.removeFirst())
+    val ansList2 = ansQueue.toList()
+    val ans1 = (1 until n).map { Math.abs(ansList1[it] - ansList1[it - 1]) }.sum()
+    val ans2 = (1 until n).map { Math.abs(ansList2[it] - ansList2[it - 1]) }.sum()
 
-    aList.forEach { inQueue.add(it) }
-    ansQueue.clear()
-    ansQueue.add(inQueue.removeLast())
-    getFromLast = false
-    while (inQueue.isNotEmpty()) {
-        if (getFromLast) {
-            ansQueue.addFirst(inQueue.removeLast())
-            if (inQueue.isEmpty()) break
-            ansQueue.addLast(inQueue.removeLast())
-        } else {
-            ansQueue.addFirst(inQueue.removeFirst())
-            if (inQueue.isEmpty()) break
-            ansQueue.addLast(inQueue.removeFirst())
-        }
-        getFromLast = !getFromLast
-    }
-
-    ansList = ansQueue.toList()
-    ans = Math.max(ans, (1 until n).map { Math.abs(ansList[it] - ansList[it - 1]) }.sum())
-    println(ans)
+    println(Math.max(ans1, ans2))
 }

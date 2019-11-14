@@ -4,20 +4,35 @@ fun main(args: Array<String>) {
     val n = readLine()!!.toInt()
     val aList = readLine()!!.split(' ').map(String::toLong)
     val bList = readLine()!!.split(' ').map(String::toLong)
+    val abList = (0 until n).map { Pair(aList[it], bList[it]) }.sortedBy { it.second }
 
-    val aS = aList.sorted()
-    val bS = bList.sorted()
+    val aSorted = aList.sorted()
+    val bSorted = bList.sorted()
 
-    val abS = (0 until n).map { Pair(aList[it],bList[it]) }.sortedBy { it.second }
+    if ((0 until n).any { aSorted[it] > bSorted[it] }) {
+        println("No")
+        return
+    }
 
-    val isOk = (0 until n).all { aS[it] <= bS[it] }
-    val moveCount = (0 until n).count { aList[it] > bList[it] }
-    val okCount = (0 until n).count { aS[it] == abS[it].first }
-    val isNg = okCount == 0
+    val aStart =  (0 until n).map {abList[it].first }
+    val aStartWithIndex =  (0 until n).map {Pair(aStart[it],it) }.sortedBy { it.first }
+    val visited = Array(n){false}
+    var visitedCount = 1
+    var cur = 0
+    while(!visited[cur]){
+        visited[cur] = true
+        visitedCount++
+        cur = aStartWithIndex[cur].second
+    }
 
-    if (isOk && isNg.not()) {
+    if(visitedCount<n){
         println("Yes")
-    } else {
+        return
+    }
+
+    if ((0 until n-1).any { bSorted[it] > aSorted[it+1] }) {
+        println("Yes")
+    }else{
         println("No")
     }
 }

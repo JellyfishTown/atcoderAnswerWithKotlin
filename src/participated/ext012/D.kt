@@ -9,36 +9,38 @@ fun main(args: Array<String>) {
         val (l, r, c) = readLine()!!.split(' ').map(String::toLong)
         lrcList.add(Triple(l, r, c))
     }
-    lrcList.sortBy { it.third }
-    lrcList.sortBy { it.first }
-    val lrcG = lrcList.groupBy { it.first }
 
-    val minDist = Array(n.toInt() + 1) { Long.MAX_VALUE / 2 }
-    minDist[1] = 0
-    var cur = 1L
-    while (cur < n) {
-        if (lrcG.containsKey(cur).not()) continue
-        val branches = lrcG[cur]!!
-        var rMax = branches[0].first
-        for (branch in branches) {
-            val (l, r, c) = branch
-            for (next in (rMax + 1)..r) {
-                val nextDist = minDist[cur.toInt()] + c
-                if (minDist[next.toInt()] > nextDist) {
-                    minDist[next.toInt()] = nextDist
-                }
-            }
-            rMax = Math.max(rMax, r)
-        }
-        val filtered = lrcG.filterKeys { it in (cur + 1)..rMax }
-        if (filtered.isEmpty()) break
-        val (next, list) = filtered.minBy { it.value[0].third }!!
-        cur = next
+    val branches = mutableMapOf<Long, MutableList<Pair<Long, Long>>>()
+    (1..n).forEach { branches[it] = mutableListOf() }
+    (1 until n).forEach { branches[it + 1]!!.add(Pair(it, 0)) }
+    lrcList.forEach {
+        branches[it.first]!!.add(Pair(it.second, it.third))
     }
 
-    if (minDist[n.toInt()] > Long.MAX_VALUE / 3) {
+    val queue = PriorityQueue<Pair<Long, Long>>(n.toInt(), Comparator { o1: Pair<Long, Long>?, o2: Pair<Long, Long>? ->
+        if (o1!!.second > o2!!.second) 1 else -1
+    })
+    queue.add(Pair(1, 0))
+
+    val minCost = Array(n.toInt() + 1) { Long.MAX_VALUE / 2 }
+    minCost[1] = 0
+    while (queue.isNotEmpty()) {
+        val (cur, curCost) = queue.poll()
+        val tos = branches[cur]!!
+        for (branch in tos) {
+            val (to, cost) = branch
+            val nextCost = curCost + cost
+            if (minCost[to.toInt()] > nextCost) {
+                minCost[to.toInt()] = nextCost
+                queue.add(Pair(to, nextCost))
+            }
+        }
+    }
+
+    val goalCost = minCost[n.toInt()]
+    if (goalCost >= Long.MAX_VALUE / 2) {
         println(-1)
     } else {
-        println(minDist[n.toInt()])
+        println(goalCost)
     }
 }

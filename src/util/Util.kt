@@ -1,7 +1,5 @@
 package util
 
-import java.math.BigInteger
-
 //コピペ用ライブラリ
 
 
@@ -26,35 +24,6 @@ fun calcFactorial(i: Long, modNum: Long? = null): Long {
         else -> i * calcFactorial(i - 1)
     }
 }
-
-//nCrを計算する
-    fun calcCombination(n: Long, r: Long, modNum: Long = 1L): Long {
-        val tr = if (n - r < r) n - r else r
-        if (tr == 0L) return 1
-        if (tr == 1L) return n
-        val numerator = (0 until r).map { n - tr + it + 1 }.toMutableList()
-        val denominator = (0 until r).map { it + 1 }.toMutableList()
-
-        for (p in 2..tr.toInt()) {
-            val pivot = denominator[p - 1]
-            if (pivot > 1) {
-                val offset = (n - tr) % p
-                for (k in p - 1 until r step p.toLong()) {
-                    numerator[(k - offset).toInt()] /= pivot
-                    denominator[k.toInt()] /= pivot
-                }
-            }
-        }
-        var result = 1L
-        for(k in 0 until r){
-            if(numerator[k.toInt()]>1){
-                result *= numerator[k.toInt()]
-                result %= modNum
-
-            }
-        }
-        return result
-    }
 
 //与えられたArrayの全ての組み合わせを返す
 class Permutation<T> private constructor(private val baseIndex: Int, private var index: Int, val target: Array<T>?) {
@@ -122,18 +91,7 @@ class Combination(n: Int, private val mod: Int) {
     }
 }
 
-//return nCk mod M (M must be prime number) O(min(k,n-k)*logM)
-fun nCk(n: Int, k: Int, M: Int): Int {
-    var ret: Long = 1
-    val min = Math.min(k, n - k)
-    for (i in 1..min) {
-        ret = ret * pow(i.toLong(), (M - 2).toLong(), M) % M
-    }
-    for (i in n - min + 1..n) {
-        ret = ret * i % M
-    }
-    return ret.toInt()
-}
+
 
 //val ncr = Array(2001) { LongArray(2001){0} }
 //ncr[0][0] = 1
@@ -145,7 +103,7 @@ fun nCk(n: Int, k: Int, M: Int): Int {
 //}
 
 //return a^b mod M O(logB)
-fun pow(a: Long, b: Long, mod: Int): Long {
+fun pow(a: Long, b: Long, mod: Long): Long {
     var bt = b
     var ret: Long = 1
     var tmp = a
@@ -153,6 +111,19 @@ fun pow(a: Long, b: Long, mod: Int): Long {
         if (bt and 1 == 1L) ret = ret * tmp % mod
         tmp = tmp * tmp % mod
         bt = bt shr 1
+    }
+    return ret
+}
+
+//return nCk mod mod (mod must be prime number) O(min(k,n-k)*logM)
+fun nCk(n: Long, k: Long, mod: Long): Long {
+    var ret: Long = 1
+    val min = Math.min(k, n - k)
+    for (i in 1..min) {
+        ret = ret * pow(i, (mod - 2), mod) % mod
+    }
+    for (i in n - min + 1..n) {
+        ret = ret * i % mod
     }
     return ret
 }

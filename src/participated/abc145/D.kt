@@ -1,7 +1,7 @@
 package participated.abc145
 
 fun main(args: Array<String>) {
-    fun pow(a: Long, b: Long, mod: Int): Long {
+    fun pow(a: Long, b: Long, mod: Long): Long {
         var bt = b
         var ret: Long = 1
         var tmp = a
@@ -13,16 +13,16 @@ fun main(args: Array<String>) {
         return ret
     }
 
-    fun nCk(n: Int, k: Int, M: Int): Int {
+    fun nCk(n: Long, k: Long, mod: Long): Long {
         var ret: Long = 1
         val min = Math.min(k, n - k)
         for (i in 1..min) {
-            ret = ret * pow(i.toLong(), (M - 2).toLong(), M) % M
+            ret = ret * pow(i, (mod - 2), mod) % mod
         }
         for (i in n - min + 1..n) {
-            ret = ret * i % M
+            ret = ret * i % mod
         }
-        return ret.toInt()
+        return ret
     }
 
 
@@ -36,5 +36,5 @@ fun main(args: Array<String>) {
         println(0)
         return
     }
-    println(nCk(totalMove.toInt(), countR.toInt(), mod.toInt()) % mod)
+    println(nCk(totalMove, countR, mod) % mod)
 }

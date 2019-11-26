@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
         if (input.contains(' ')) {
             val (z, ta, tb) = input.split(' ').map(String::toLong)
             b += tb
-            aList.add(aList.toTypedArray().lowerBound(ta),ta)
+//            aList.add(aList.toTypedArray().lowerBound(ta),ta)
         } else {
             val med = aList[(aList.size - 1) / 2]
             print(med)
@@ -19,7 +19,4 @@ fun main(args: Array<String>) {
         }
     }
 }
-fun Array<Long>.lowerBound(target: Long, d: Long = 1): Int {
-    val binarySearch = this.binarySearch(target - d)
-    return if (binarySearch >= 0) binarySearch else Math.abs(binarySearch) - 1
-}
+

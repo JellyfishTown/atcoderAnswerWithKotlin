@@ -30,7 +30,7 @@ fun main(args: Array<String>) {
 }
 
 
-//fun main(args: Array<String>) {
+//fun past.point100.main(args: Array<String>) {
 //    val n = readLine()!!.toLong()
 //    val data = mutableMapOf<Pair<Long, Long>, MutableList<Long>>()
 //    var count = 0
@@ -58,7 +58,7 @@ fun main(args: Array<String>) {
 //}
 
 
-//fun main(args: Array<String>) {
+//fun past.point100.main(args: Array<String>) {
 //    val n = readLine()!!.toLong()
 //    val data = mutableMapOf<Pair<Long, Long>, Long>()
 //    val (x1, y1, h1) = readLine()!!.split(' ').map(String::toLong)

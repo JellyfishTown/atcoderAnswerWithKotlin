@@ -29,7 +29,7 @@ fun main(args: Array<String>) {
     }
 }
 
-//fun past.point200.past.point400.participated.abc106.participated.abc104.participated.main(args: Array<String>) {
+//fun past.point200.past.point400.participated.abc106.participated.abc104.participated.past.point100.main(args: Array<String>) {
 //    val (n, m, s, t) = readLine()!!.split(' ').map(String::toInt)
 //    val uList = mutableListOf<Int>()
 //    val vList = mutableListOf<Int>()
@@ -72,7 +72,7 @@ fun main(args: Array<String>) {
 
 
 //C
-//fun past.point200.past.point400.participated.abc106.participated.abc104.participated.main(args: Array<String>) {
+//fun past.point200.past.point400.participated.abc106.participated.abc104.participated.past.point100.main(args: Array<String>) {
 //    val (n, m, d) = readLine()!!.split(' ').map(String::toLong)
 //    val sumBeauty = if (d != 0L) {
 //        (n - d) * 2 * (m - 1)
@@ -84,7 +84,7 @@ fun main(args: Array<String>) {
 //}
 
 //B
-//fun past.point200.past.point400.participated.abc106.participated.abc104.participated.main(args: Array<String>) {
+//fun past.point200.past.point400.participated.abc106.participated.abc104.participated.past.point100.main(args: Array<String>) {
 //    val s = readLine()!!.toCharArray()
 //    val w = readLine()!!.toInt()
 //    for (i in 0..(s.size - 1) step w) {
@@ -94,7 +94,7 @@ fun main(args: Array<String>) {
 
 
 //A
-//fun past.point200.past.point400.participated.abc106.participated.abc104.participated.main(args: Array<String>) {
+//fun past.point200.past.point400.participated.abc106.participated.abc104.participated.past.point100.main(args: Array<String>) {
 //    val (a, b) = readLine()!!.split(" ").map(String::toInt)
 //    when {
 //        (a + b) == 15 -> {

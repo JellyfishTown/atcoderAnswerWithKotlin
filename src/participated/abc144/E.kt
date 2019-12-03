@@ -31,7 +31,7 @@ fun main(args: Array<String>) {
 }
 
 //
-//fun main(args: Array<String>) {
+//fun past.point100.main(args: Array<String>) {
 //    val (n, k) = readLine()!!.split(' ').map(String::toLong)
 //    val aList = readLine()!!.split(' ').map(String::toLong).sortedDescending()
 //    val fList = readLine()!!.split(' ').map(String::toLong).sorted()

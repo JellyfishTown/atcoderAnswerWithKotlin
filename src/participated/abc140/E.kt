@@ -35,7 +35,7 @@ fun main(args: Array<String>) {
     println(ans)
 }
 
-//fun main(args: Array<String>) {
+//fun past.point100.main(args: Array<String>) {
 //    val n = readLine()!!.toInt()
 //    val pList = readLine()!!.split(' ').map(String::toLong)
 //    var ans = 0L

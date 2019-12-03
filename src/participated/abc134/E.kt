@@ -32,7 +32,7 @@ fun main(args: Array<String>) {
 }
 
 
-//fun main(args: Array<String>) {
+//fun past.point100.main(args: Array<String>) {
 //    val n = readLine()!!.toInt()
 //    val aList = mutableListOf<Int>()
 //    (1..n).forEach { aList.add(readLine()!!.toInt()) }

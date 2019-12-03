@@ -1,6 +1,6 @@
 //package participated.agc029
 //
-//fun main(args: Array<String>) {
+//fun past.point100.main(args: Array<String>) {
 //    val n = readLine()!!.toLong()
 //    val aList = readLine()!!.split(' ').map(String::toLong).sorted().toMutableList()
 //

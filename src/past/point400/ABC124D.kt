@@ -22,7 +22,7 @@ fun main(args: Array<String>) {
         println(nums[i])
     }
 }
-//fun main(args: Array<String>) {
+//fun past.point100.main(args: Array<String>) {
 //    val (x, y, z, k) = readLine()!!.split(" ").map(String::toLong)
 //    var xList = readLine()!!.split(" ").map(String::toLong).sorted()
 //    var yList = readLine()!!.split(" ").map(String::toLong).sorted()

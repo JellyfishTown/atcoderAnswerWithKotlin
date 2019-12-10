@@ -1,5 +1,6 @@
 package past.point400
 
+// なし
 fun main(args: Array<String>) {
     val (n, h) = readLine()!!.split(' ').map(String::toLong)
     var aMax = 0L

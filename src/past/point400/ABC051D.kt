@@ -1,5 +1,6 @@
 package past.point400
 
+//ワーシャルフロイド  最短経路
 fun main(args: Array<String>) {
     val (n, m) = readLine()!!.split(" ").map(String::toInt)
     val minCost = Array(n + 1) { Array(n + 1) { Long.MAX_VALUE / 10 } }

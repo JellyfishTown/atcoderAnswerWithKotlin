@@ -1,5 +1,6 @@
 package past.point400
 
+//累積和？
 fun main(args: Array<String>) {
     fun calcMana(a: Pair<Int, Int>, b: Pair<Int, Int>) =
             (Math.abs(a.first - b.first) + Math.abs(a.second - b.second)).toLong()

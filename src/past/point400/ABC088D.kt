@@ -1,5 +1,5 @@
 package past.point400
-
+//探索 BFS DFS
 import java.util.*
 
 fun main(args: Array<String>) {

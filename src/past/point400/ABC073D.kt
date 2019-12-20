@@ -1,5 +1,7 @@
 package past.point400
 
+import kotlin.math.min
+
 
 //ワーシャルフロイド,組み合わせ全通り(Permutation)
 fun main(args: Array<String>) {
@@ -57,5 +59,16 @@ fun main(args: Array<String>) {
             }
         }
     }
+    val permutation = Permutation(rList.toTypedArray())
+    var minDist = Long.MAX_VALUE / 2
+    do {
+        val target = permutation.target!!
+        var tempDist = 0L
+        for (i in 0..(r - 2)) {
+            tempDist += costMap[target[i]][target[i + 1]]
+        }
+        minDist = Math.min(minDist, tempDist)
 
+    } while (permutation.next())
+    println(minDist)
 }

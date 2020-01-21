@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
     }
 
 
-    var ac = 0`
+    var ac = 0
     var bc = 0
     var cc = 0
     for (i in 0 until s.length) {

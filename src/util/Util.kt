@@ -16,118 +16,6 @@ fun input() {
     }
 }
 
-//階乗を計算する。
-fun calcFactorial(i: Long, modNum: Long? = null): Long {
-    return when {
-        i == 1L -> 1L
-        modNum != null -> (i * calcFactorial(i - 1, modNum)) % modNum
-        else -> i * calcFactorial(i - 1)
-    }
-}
-
-//与えられたArrayの全ての組み合わせを返す
-class Permutation<T> private constructor(private val baseIndex: Int, private var index: Int, val target: Array<T>?) {
-    private var subPermutation: Permutation<T>? = null
-
-    constructor(objs: Array<T>) : this(0, 0, objs.clone())
-
-    init {
-        if (target == null || target.isEmpty()) {
-            throw IllegalArgumentException()
-        }
-
-        if (this.index < this.target.size - 1) {
-            this.subPermutation = Permutation(this.baseIndex + 1, this.index + 1, this.target)
-        }
-    }
-
-    operator fun next(): Boolean {
-        if (this.subPermutation == null) {
-            return false
-        }
-        val result = this.subPermutation!!.next()
-        if (result) {
-            return true
-        }
-        this.swap(this.baseIndex, this.index)
-        ++this.index
-        if (this.target!!.size <= this.index) {
-            this.index = this.baseIndex
-            return false
-        }
-        this.swap(this.index, this.baseIndex)
-        return true
-    }
-
-    private fun swap(index1: Int, index2: Int) {
-        val tmp = this.target!![index1]
-        this.target[index1] = this.target[index2]
-        this.target[index2] = tmp
-    }
-}
-
-//mod付きのnCrを高速計算する
-class Combination(n: Int, private val mod: Int) {
-    private val fact = LongArray(n + 1)
-    private val inv = LongArray(n + 1)
-    private val invFact = LongArray(n + 1)
-
-    init {
-        inv[1] = 1
-        for (i in 2 until inv.size) {
-            inv[i] = inv[mod % i] * (mod - mod / i) % mod
-        }
-
-        fact[0] = 1
-        invFact[0] = 1
-        for (i in 1 until inv.size) {
-            fact[i] = i * fact[i - 1] % mod
-            invFact[i] = inv[i] * invFact[i - 1] % mod
-        }
-    }
-
-    fun calc(n: Int, r: Int): Long {
-        return if (n < r) 0 else fact[n] * invFact[n - r] % mod * invFact[r] % mod
-    }
-}
-
-
-
-//val ncr = Array(2001) { LongArray(2001){0} }
-//ncr[0][0] = 1
-//for (i in 1..2000) {
-//    ncr[i][0] = 1
-//    for (j in 1..i) {
-//        ncr[i][j] = (ncr[i - 1][j - 1] + ncr[i - 1][j]) % mod
-//    }
-//}
-
-//return a^b mod M O(logB)
-fun pow(a: Long, b: Long, mod: Long): Long {
-    var bt = b
-    var ret: Long = 1
-    var tmp = a
-    while (bt > 0) {
-        if (bt and 1 == 1L) ret = ret * tmp % mod
-        tmp = tmp * tmp % mod
-        bt = bt shr 1
-    }
-    return ret
-}
-
-//return nCk mod mod (mod must be prime number) O(min(k,n-k)*logM)
-fun nCk(n: Long, k: Long, mod: Long): Long {
-    var ret: Long = 1
-    val min = Math.min(k, n - k)
-    for (i in 1..min) {
-        ret = ret * pow(i, (mod - 2), mod) % mod
-    }
-    for (i in n - min + 1..n) {
-        ret = ret * i % mod
-    }
-    return ret
-}
-
 fun calcFactors(n: Int): Map<Int, Int> {//素因数分解
     val factors = mutableMapOf<Int, Int>()
     var tmp = n
@@ -157,6 +45,11 @@ fun repeatSquaring(n: Long, p: Long, mod: Long): Long {
 // a ÷ bをmodの世界で行う
 fun divWithMod(a: Long, b: Long, mod: Long): Long {
     return ((a % mod) * java.math.BigInteger.valueOf(b).modInverse(java.math.BigInteger.valueOf(mod)).toLong()) % mod
+}
+
+//切り上げ割り算
+fun divWithCeil(a: Long, b: Long): Long {
+    return (a + b - 1) / b
 }
 
 //引数の数値を2進数表記に変換して文字配列にする

@@ -2,18 +2,29 @@ package participated.abc163
 
 fun main(args: Array<String>) {
     val n = readLine()!!.toInt()
-    val s = readLine()!!
-    val aList = (1..n).map { readLine()!!.toLong() }
-    val bList = readLine()!!.split(' ').map(String::toLong)
-    val cdList = (1..n).map {
-        val (c, d) = readLine()!!.split(' ').map(String::toLong)
-        Pair(c, d)
-    }
-    val (a, b, c) = readLine()!!.split(' ').map(String::toLong)
+    val aList = readLine()!!.split(' ').map(String::toLong).toMutableList()
+    aList.add(0, 0)
+    val apList = (1..n).map { Pair(it, aList[it]) }.sortedByDescending { it.second }
 
-    if (true) {
-        println()
-    } else {
-        println()
+
+    var l = 1
+    var r = n
+    var ans = 0L
+    for (p in apList) {
+        val (i, a) = p
+        val la = aList[l]
+        val ra = aList[r]
+        val ldiff = Math.abs(l - i).toLong()
+        val rdiff = Math.abs(r - i).toLong()
+        val lVal = ldiff * a + ldiff * la
+        val rVal = rdiff * a + rdiff * ra
+        if (lVal > rVal) {
+            ans += ldiff * a
+            l++
+        } else {
+            ans += rdiff * a
+            r--
+        }
     }
+    println(ans)
 }

@@ -4,7 +4,7 @@
 //
 //import java.util.*
 //
-//fun past.point100.main(args: Array<String>) {
+//fun past.point100.past.point300.main(args: Array<String>) {
 //    val (n, m, start, goal) = readLine()!!.split(' ').map(String::toInt)
 //    val yenNodes = mutableMapOf<Int, Node>()
 //    val snuukNodes = mutableMapOf<Int, Node>()

@@ -11,6 +11,6 @@ fun main(args: Array<String>) {
     println(ans)
 }
 
-//fun past.point100.main(args: Array<String>) {
+//fun past.point100.past.point300.main(args: Array<String>) {
 //    println((1..(readLine()!!.toInt())).map { if (it.toString().reversed().toInt() > it) 1 else 0 }.sum())
 //}

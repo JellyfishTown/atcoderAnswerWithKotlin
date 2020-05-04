@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
     }
     println(dp[n - 1].max()!!)
 }
-//fun past.point100.main(args: Array<String>) {
+//fun past.point100.past.point300.main(args: Array<String>) {
 //    val n = readLine()!!.toInt()
 //    val input = mutableMapOf<Int, List<Long>>()
 //    (1..n).forEachIndexed { index, i -> input[index] =  readLine()!!.split(' ').map(String::toLong)}

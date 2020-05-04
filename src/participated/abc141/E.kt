@@ -1,7 +1,7 @@
 //package participated.abc141
 //
 ////最長部分一致
-//fun past.point100.main(args: Array<String>) {
+//fun past.point100.past.point300.main(args: Array<String>) {
 //    val n = readLine()!!.toInt()
 //    val s = readLine()!!
 //

@@ -66,7 +66,7 @@ fun rev(i: Int): Int {
     return i.toString().toCharArray().reversed().joinToString(separator = "").toInt()
 }
 
-//fun participated.abc106.participated.abc104.participated.past.point100.main(args: Array<String>) {
+//fun participated.abc106.participated.abc104.participated.past.point100.past.point300.main(args: Array<String>) {
 //    var count = readLine()!!.toInt()
 //    val map = readLine()!!.toCharArray()
 //    if (count <= 0) {

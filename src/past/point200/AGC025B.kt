@@ -70,7 +70,7 @@ private fun inv(a: Long): Long {
 
 //import java.math.BigDecimal
 //
-//fun past.point300.past.point300.past.point300.past.point200.past.point400.past.point200.past.point200.past.point200.past.point400.participated.abc106.participated.abc104.participated.past.point100.main(args: Array<String>) {
+//fun past.point300.past.point300.past.point300.past.point200.past.point400.past.point200.past.point200.past.point200.past.point400.participated.abc106.participated.abc104.participated.past.point100.past.point300.main(args: Array<String>) {
 //    val (N, A, B, K) = readLine()!!.split(" ").map(String::toLong)
 //    var ans = BigDecimal(0)
 //    for (a in 0..N) {

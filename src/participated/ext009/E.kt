@@ -42,7 +42,7 @@ fun main(args: Array<String>) {
     }
 }
 
-//fun past.point100.main(args: Array<String>) {
+//fun past.point100.past.point300.main(args: Array<String>) {
 //    val mod = 1000003L
 //    fun divWithMod(a: Long, b: Long): Long {
 //        return ((a % mod) * b.toBigInteger().modInverse(mod.toBigInteger()).toLong()) % mod

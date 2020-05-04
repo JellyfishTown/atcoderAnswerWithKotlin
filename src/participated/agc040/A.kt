@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
     println((0 until n).map { Math.max(leftArray[it], rightArray[it]) }.sum())
 }
 //
-//fun past.point100.main(args: Array<String>) {
+//fun past.point100.past.point300.main(args: Array<String>) {
 //    val s = readLine()!!
 //    val n = s.length + 1
 //    val ansArray = Array(n) { 0L }

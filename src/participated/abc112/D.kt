@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
     }
 }
 
-//fun past.point100.main(args: Array<String>) {
+//fun past.point100.past.point300.main(args: Array<String>) {
 //    val (n, m) = readLine()!!.split(' ').map(String::toLong)
 //    var ans = 1L
 //    for (a in 1L..(Math.sqrt(m.toDouble())).toLong()) {

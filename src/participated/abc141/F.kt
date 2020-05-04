@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
 
 }
 
-//fun past.point100.main(args: Array<String>) {
+//fun past.point100.past.point300.main(args: Array<String>) {
 //    fun toBinaryNumberCharArray(num: Long, keta: Int): CharArray {
 //        return String.format("%0${keta}d", java.lang.Long.toBinaryString(num).toLong()).toCharArray().reversedArray()
 //    }
